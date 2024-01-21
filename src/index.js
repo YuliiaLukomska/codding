@@ -17,16 +17,14 @@
 
 import { refs } from './js/refs';
 import { createMarkUp } from './js/createMarkUp';
+import { createObjTask } from './js/createObjTask';
 
 refs.form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
-  const task = {};
-  new FormData(refs.form).forEach((value, key) => {
-    task[key] = value;
-  });
+  const task = createObjTask();
 
   const firstInputValue = task.taskName;
   const secondInputValue = task.taskText;
@@ -34,4 +32,5 @@ function onFormSubmit(event) {
     'beforeend',
     createMarkUp(firstInputValue, secondInputValue)
   );
+  form.reset();
 }
