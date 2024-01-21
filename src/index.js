@@ -16,24 +16,22 @@
  */
 
 import { refs } from './js/refs';
+import { createMarkUp } from './js/createMarkUp';
 
 refs.form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
-  const firstInputValue = form.elements.taskName.value;
-  const secondInputValue = form.elements.taskText.value;
+  const task = {};
+  new FormData(refs.form).forEach((value, key) => {
+    task[key] = value;
+  });
+
+  const firstInputValue = task.taskName;
+  const secondInputValue = task.taskText;
   refs.list.insertAdjacentHTML(
     'beforeend',
     createMarkUp(firstInputValue, secondInputValue)
   );
-}
-
-function createMarkUp(firstInputValue, secondInputValue) {
-  return `<li class="task-list-item">
-      <button class="task-list-item-btn">Удалить</button>
-      <h3>${firstInputValue}</h3>
-      <p>${secondInputValue}</p>
-  </li>`;
 }
