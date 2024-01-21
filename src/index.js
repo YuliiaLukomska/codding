@@ -25,12 +25,6 @@ function onFormSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const task = createObjTask();
-
-  const firstInputValue = task.taskName;
-  const secondInputValue = task.taskText;
-  refs.list.insertAdjacentHTML(
-    'beforeend',
-    createMarkUp(firstInputValue, secondInputValue)
-  );
+  refs.list.insertAdjacentHTML('beforeend', createMarkUp(task));
   form.reset();
 }
